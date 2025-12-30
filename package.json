@@ -1,0 +1,15 @@
+{
+  "name": "invitacion",
+  "version": "1.0.0",
+  "description": "Invitacion Boda Digital",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "serve": "npx http-server . -p 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1"
+  }
+}
