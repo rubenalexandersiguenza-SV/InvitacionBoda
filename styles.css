@@ -678,32 +678,29 @@ section {
         min-height: 500px;
     }
     
-    .hero-title {
-        font-size: 2.2rem;
-    }
-    
     .hero-title .name {
+        font-size: 6rem;
         display: block;
         margin: 0.5rem 0;
     }
     
     .hero-title .and {
-        font-size: 1.5rem;
+        font-size: 3rem;
         display: block;
         margin: 0.5rem 0;
     }
     
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 1.8 rem;
         padding: 0 20px;
     }
     
     .hero-date {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .countdown {
