@@ -221,3 +221,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+const audio = document.getElementById("audioFondo");
+const btn = document.getElementById("audioBtn");
+
+btn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    audio.volume = 0.05; // volumen de fondo
+    btn.textContent = "⏸️";
+  } else {
+    audio.pause();
+    btn.textContent = "▶️";
+  }
+});
+
