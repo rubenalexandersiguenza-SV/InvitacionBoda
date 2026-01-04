@@ -596,6 +596,53 @@ section {
     font-weight: 300;
 }
 
+/*-------------------------Landing------------------------------*/
+    .bdy{
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        background-image: url('Resources/img/IMG_6414.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+    }
+
+    .landing .bdy{
+        text-align: center;
+    }
+
+    .icon-wrapper {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon-wrapper:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .icon-wrapper img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 4rem;
+    }
+
 /* Animations */
 @keyframes fadeInUp {
     from {
