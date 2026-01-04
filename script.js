@@ -221,6 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+/*Funcion para reproducir el audio al dar click en el boton*/
+/*
 const audio = document.getElementById("audioFondo");
 const btn = document.getElementById("audioBtn");
 
@@ -233,5 +235,19 @@ btn.addEventListener("click", () => {
     audio.pause();
     btn.textContent = "▶️";
   }
+});
+*/
+
+const audio = document.getElementById("audioFondo");
+let yaReproducido = false;
+
+window.addEventListener("scroll", () => {
+if (!yaReproducido) {
+    audio.play().then(() => {
+    yaReproducido = true;
+    }).catch(err => {
+    console.log("El navegador bloqueó el audio:", err);
+    });
+}
 });
 
