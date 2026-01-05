@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Countdown Timer - 29 de marzo de 2026 a las 5:00 PM (UTC-6)
     // Crear la fecha objetivo en UTC-6 (zona horaria de México/Centroamérica)
-    const weddingDate = new Date('2026-03-29T17:00:00-06:00');
+    const weddingDate = new Date('2026-03-29T16:30:00-06:00');
     
     function updateCountdown() {
         const daysEl = document.getElementById('days');
@@ -251,3 +251,15 @@ if (!yaReproducido) {
 }
 });
 
+let id = new URLSearchParams(window.location.search).get("id");
+
+if (!id) {
+  id = sessionStorage.getItem("invitadoId");
+}
+
+if (!id) {
+  document.body.innerHTML = "<h2>Invitación no válida</h2>";
+  throw new Error("No hay token");
+}
+
+// AQUÍ sigue tu fetch a invitados.json

@@ -597,24 +597,47 @@ section {
 }
 
 /*-------------------------Landing------------------------------*/
-    .bdy{
-        margin: 0;
+    .hero-landing{
         height: 100vh;
+        min-height: 600px;
+        position: relative;
         display: flex;
-        justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        justify-content: center;
+        text-align: center;
+        color: var(--white);
+        margin: 0;
+        text-align: center;
         background-image: url('Resources/img/IMG_6414.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        font-family: 'Segoe UI', sans-serif;
-        color: white;
+        z-index: 0;
+    
     }
 
-    .landing .bdy{
+    .overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* Ajusta la opacidad aquí (0.0 a 1.0) - valores más altos = más oscuro */
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .landing{
+        position: relative;
+        display: flex;
         text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
     }
 
     .icon-wrapper {
@@ -627,6 +650,7 @@ section {
         align-items: center;
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
     }
 
     .icon-wrapper:hover {
@@ -641,6 +665,30 @@ section {
 
     .bi-envelope-heart-fill{
         font-size: 4rem;
+    }
+
+    .guest-name-title{
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
     }
 
 /* Animations */
@@ -685,11 +733,11 @@ section {
     }
     
     .hero-title {
-        font-size: 3rem;
+        font-size: 5rem;
     }
     
     .hero-title .and {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     
     .hero-subtitle {
@@ -743,6 +791,41 @@ section {
     
     section {
         padding: 60px 0;
+    }
+
+    /*Landing page styles*/
+
+    .guest-name-title{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 2.5rem;
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
     }
 }
 
@@ -856,6 +939,41 @@ section {
     
     .detail-card {
         padding: 2rem 1.5rem;
+    }
+
+    /*Landing page styles*/
+
+    .guest-name-title{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 2rem;
+    }
+
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
     }
 }
 

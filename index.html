@@ -7,26 +7,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pacifico&family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <div class="landing bdy">
-            <div class="icon-wrapper" onclick="irInvitacion()">
-                <!-- CAMBIA ESTE ICONO -->
-                <i class="bi bi-envelope-heart-fill"></i>                
-                <!-- También puedes usar PNG o JPG -->
-            </div>
-        </div>
+  <section class="hero-landing">
 
+    <div class="overlay"></div>
+    <div class="landing">
+      <h1 class="hero-title">
+          <span class="name">Ana</span>
+          <span class="and">&</span>
+          <span class="name">Alex</span>
+      </h1>
+      <h2 class="guest-name-title">Esta invitacion esta dirigida a:</h2>
+      <h4 class="guest-name" id="nombre"></h4>
+      <h4 class="guest-spaces" id="cupos"></h4>
+      <div class="icon-wrapper" onclick="irInvitacion()">
+        <i class="bi bi-envelope-heart-fill"></i>                
+      </div>
     </div>
 
-  <script>
-    function irInvitacion() {
-      window.location.href = "invitacion.html";
-      // o URL completa:
-      // window.location.href = "https://tusitio.com/invitacion";
-    }
-  </script>
+  </section>
 
+  <script src="landing.js"></script>
 </body>
 </html>
