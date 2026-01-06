@@ -167,9 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Solo agregar event listeners si el formulario está visible
     if (rsvpForm) {
+        // Bandera para rastrear si el usuario hizo clic explícitamente en el botón de enviar
+        let userClickedSubmit = false;
+        
         // Manejar los botones de respuesta (Sí/No)
         const responseButtons = rsvpForm.querySelectorAll('.response-btn');
         const responseInput = document.getElementById('response');
+        
+        // Obtener el botón de submit y agregar listener para marcar cuando el usuario hace clic
+        const submitButton = rsvpForm.querySelector('.btn-submit');
+        if (submitButton) {
+            submitButton.addEventListener('click', function(e) {
+                // Marcar que el usuario hizo clic explícitamente
+                userClickedSubmit = true;
+            }, { once: false });
+        }
         
         responseButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -184,6 +196,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            // Si el usuario no hizo clic explícitamente en el botón, no enviar
+            if (!userClickedSubmit) {
+                console.log('Envío del formulario prevenido: el usuario no hizo clic explícitamente en enviar');
+                return;
+            }
+            
+            // Resetear la bandera después de verificar
+            userClickedSubmit = false;
             
             // Función para procesar el envío del formulario
             const proceedWithSubmission = function() {
@@ -211,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Deshabilitar el botón mientras se envía
-                const submitButton = rsvpForm.querySelector('.btn-submit');
                 const originalButtonText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
@@ -249,6 +270,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Con mode: 'no-cors' no podemos ver la respuesta, pero asumimos éxito
                     console.log('Datos enviados exitosamente (no podemos verificar la respuesta con no-cors)');
                     
+                    // Resetear la bandera después de un envío exitoso
+                    userClickedSubmit = false;
+                    
                     rsvpForm.style.display = 'none';
                     rsvpSuccess.style.display = 'block';
                     rsvpForm.reset();
@@ -257,6 +281,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => {
                     console.error('Error al enviar:', error);
+                    // Resetear la bandera en caso de error para permitir reintentos
+                    userClickedSubmit = false;
                     alert('Hubo un error al enviar tu confirmación. Por favor, intenta de nuevo. Si el problema persiste, verifica la consola del navegador (F12) para más detalles.');
                     submitButton.disabled = false;
                     submitButton.textContent = originalButtonText;
