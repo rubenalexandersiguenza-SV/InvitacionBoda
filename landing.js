@@ -9,7 +9,7 @@ function irInvitacion() {
     }
 
     sessionStorage.setItem("invitadoId", id);
-    window.location.href = 'invitacion.html?id=${id}';
+    window.location.href = `invitacion.html?id=${id}`;
     }
 
 const params = new URLSearchParams(window.location.search);

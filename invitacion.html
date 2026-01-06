@@ -162,10 +162,7 @@
                 En caso de no recibir confirmación, entenderemos que no podrás acompañarnos.</p>
             <form class="rsvp-form" id="rsvpForm">
                 <div class="form-group">
-                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="lastName" name="lastName" placeholder="Apellido" required>
+                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required readonly>
                 </div>
                 <div class="form-group">
                     <label class="response-label">¿Asistirás a nuestra boda?</label>
@@ -188,6 +185,9 @@
             </form>
             <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
                 <p>¡Gracias por confirmar tu asistencia! Te esperamos en nuestra celebración.</p>
+            </div>
+            <div class="rsvp-confirmed" id="rsvpConfirmed" style="display: none;">
+                <p>✓ Asistencia confirmada</p>
             </div>
             <br>
             <p class="rsvp-subtitle">Si tienes alguna pregunta, no dudes en contactarnos: <a href="https://wa.me/50377259837" style="color: var(--primary-color);">Ana Orellana</a> o <a href="https://wa.me/50379372111" style="color: var(--primary-color);">Alex Siguenza</a>.</p>
