@@ -108,33 +108,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para verificar el estado de confirmación en Google Sheets
     function checkConfirmationStatus(invitadoName) {
-        // Verificar primero en el JSON (para casos donde se actualiza manualmente)
-        fetch("invitados.json")
+        // Verificar confirmación en Google Sheets
+        const checkUrl = `${GOOGLE_SCRIPT_URL}?action=check&name=${encodeURIComponent(invitadoName)}`;
+        
+        fetch(checkUrl)
             .then(res => res.json())
-            .then(data => {
-                const invitado = Object.values(data).find(inv => inv.name === invitadoName);
-                if (invitado && invitado.confirmed === true) {
+            .then(result => {
+                if (result.success && result.confirmed) {
                     showConfirmedMessage();
-                    return;
                 }
-                
-                // Si no está confirmado en JSON, verificar en Google Sheets
-                const checkUrl = `${GOOGLE_SCRIPT_URL}?action=check&name=${encodeURIComponent(invitadoName)}`;
-                
-                fetch(checkUrl)
-                    .then(res => res.json())
-                    .then(result => {
-                        if (result.success && result.confirmed) {
-                            showConfirmedMessage();
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error al verificar confirmación en Sheets:', error);
-                        // Si hay error, permitir que el formulario se muestre
-                    });
             })
             .catch(error => {
-                console.error('Error al verificar en JSON:', error);
+                console.error('Error al verificar confirmación en Sheets:', error);
+                // Si hay error, permitir que el formulario se muestre
             });
     }
     
@@ -155,6 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const firstNameInput = document.getElementById('firstName');
                 if (firstNameInput) {
                     firstNameInput.value = invitado.name;
+                }
+                
+                // Mostrar información de la mesa
+                const mesaInfo = document.getElementById('mesaInfo');
+                if (mesaInfo && invitado.mesa) {
+                    mesaInfo.textContent = invitado.mesa;
                 }
                 
                 // Verificar si ya confirmó asistencia desde Google Sheets

@@ -420,9 +420,42 @@ section {
     font-weight: 600;
 }
 
+/* Mesa Section */
+.mesa {
+    background: var(--bg-light);
+}
+
+.mesa-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+}
+
+.mesa-main-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.mesa-info {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    padding: 1.5rem 2rem;
+    background: var(--white);
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
 /* RSVP Section */
 .rsvp {
-    background: var(--bg-light);
+    background: var(--white);
 }
 
 .rsvp-subtitle {
@@ -956,6 +989,15 @@ section {
     
     .story-text {
         font-size: 1rem;
+    }
+    
+    .mesa-main-text {
+        font-size: 1.1rem;
+    }
+    
+    .mesa-info {
+        font-size: 1.5rem;
+        padding: 1.2rem 1.5rem;
     }
     
     .detail-card {
