@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const callLink = document.getElementById('callLink');
                     if (callLink) {
                         // TODO: Reemplazar con el enlace real de la llamada
-                        callLink.href = ''; // Cambiar por el enlace real
+                        callLink.href = 'meet.google.com/zzu-quph-mfz'; // Cambiar por el enlace real
                     }
                 } else {
                     // Mostrar información de la mesa para usuarios normales
