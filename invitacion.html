@@ -93,7 +93,7 @@
                     <p>29 de Marzo de 2026</p>
                     <p class="detail-time">4:30 PM</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card detail-location" id="detailLocation">
                     <i class="bi bi-pin-map detail-icon"></i>
                     <h3>Lugar</h3>
                     <p>Casa Verde</p>
@@ -105,13 +105,22 @@
                      <span>Ver ubicación en Google Maps</span>
                  </a>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card detail-dresscode" id="detailDresscode">
                     <i class="bi bi-people detail-icon"></i>
                     <h3>Código de Vestimenta</h3>
                     <p>Traje y vestido formal en tonos sobrios y calzado comodo para disfrutar al maximo!!</p>
                 </div>
+                <div class="detail-card detail-call" id="detailCall" style="display: none;">
+                    <i class="bi bi-camera-video detail-icon"></i>
+                    <h3>Únete a la Celebración</h3>
+                    <p>No puedes estar físicamente con nosotros, pero queremos que formes parte de este momento especial.</p>
+                    <a href="#" id="callLink" target="_blank" rel="noopener noreferrer" class="btn-call">
+                        <i class="bi bi-camera-video-fill"></i>
+                        <span>Unirse a la Llamada</span>
+                    </a>
+                </div>
             </div>
-            <div class="details-message">
+            <div class="details-message" id="detailsMessage">
                 <p class="details-text">Su presencia es el mejor regalo para nosotros.</p>
                 <p class="details-text">Si desea obsequiarnos algo adicional, agradeceremos que sea en sobre.</p>
             </div>
@@ -166,12 +175,12 @@
     </section>
 
     <!-- Mesa Section -->
-    <section class="mesa">
+    <section class="mesa" id="mesaSection">
         <div class="container">
             <h2 class="section-title">Tu Mesa</h2>
             <div class="mesa-content">
-                <p class="mesa-main-text">Te estamos ubicando en una mesa en la que te sentiras comodo</p>
-                <p class="mesa-info" id="mesaInfo">Esperalo pronto</p>
+                <p class="mesa-main-text">Con mucho cariño hemos reservado un lugar especial para ti. 🤍✨</p>
+                <p class="mesa-info" id="mesaInfo"></p>
             </div>
         </div>
     </section>

@@ -143,10 +143,57 @@ document.addEventListener('DOMContentLoaded', function() {
                     firstNameInput.value = invitado.name;
                 }
                 
-                // Mostrar información de la mesa
-                const mesaInfo = document.getElementById('mesaInfo');
-                if (mesaInfo && invitado.mesa) {
-                    mesaInfo.textContent = invitado.mesa;
+                // Token especial para usuario remoto
+                const REMOTE_USER_TOKEN = 'm9h0i1j2-k3l4-45m3-7n56-234567890123';
+                
+                // Verificar si es el usuario remoto
+                if (id === REMOTE_USER_TOKEN) {
+                    // Ocultar sección de mesa
+                    const mesaSection = document.getElementById('mesaSection');
+                    if (mesaSection) {
+                        mesaSection.style.display = 'none';
+                    }
+                    
+                    // Ocultar tarjetas de lugar y vestimenta
+                    const detailLocation = document.getElementById('detailLocation');
+                    const detailDresscode = document.getElementById('detailDresscode');
+                    if (detailLocation) {
+                        detailLocation.style.display = 'none';
+                    }
+                    if (detailDresscode) {
+                        detailDresscode.style.display = 'none';
+                    }
+                    
+                    // Ocultar mensaje de regalo
+                    const detailsMessage = document.getElementById('detailsMessage');
+                    if (detailsMessage) {
+                        detailsMessage.style.display = 'none';
+                    }
+                    
+                    // Mostrar tarjeta de llamada
+                    const detailCall = document.getElementById('detailCall');
+                    if (detailCall) {
+                        detailCall.style.display = 'block';
+                    }
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //AGREGAR ENLACE DE LA LLAMADA ACA
+                    // Configurar enlace de llamada (aquí puedes cambiar la URL)
+                    const callLink = document.getElementById('callLink');
+                    if (callLink) {
+                        // TODO: Reemplazar con el enlace real de la llamada
+                        callLink.href = ''; // Cambiar por el enlace real
+                    }
+                } else {
+                    // Mostrar información de la mesa para usuarios normales
+                    const mesaInfo = document.getElementById('mesaInfo');
+                    if (mesaInfo && invitado.mesa) {
+                        mesaInfo.textContent = invitado.mesa;
+                    }
                 }
                 
                 // Verificar si ya confirmó asistencia desde Google Sheets
