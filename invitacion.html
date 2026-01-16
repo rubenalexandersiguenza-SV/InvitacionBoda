@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Invitación de Boda Digital">
+    <title>Boda Sigüenza Orellana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pacifico&family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
+<body>
+    <!--Audio para la invitacion-->
+    <audio id="audioFondo" src="Resources/audio/Alex warren - Ordinary.mp3"></audio>
+
+    <!-- Boton para reproducir el audio
+    <button id="audioBtn" aria-label="Control de música">
+        ▶️
+    </button>
+    -->
+
+    <!-- Hero Section -->
+    <!-- Para cambiar la imagen de fondo, edita la propiedad background-image en styles.css -->
+    <!-- Busca '.hero' y cambia 'hero-bg.jpg' por la ruta de tu imagen -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="name">Ana</span>
+                <span class="and">&</span>
+                <span class="name">Alex</span>
+            </h1>
+            <p class="hero-subtitle">El lazo de tres cuerdas no se rompe tan facilmente</p>
+            <p class="hero-date">29 de Marzo de 2026</p>
+           
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="countdown">
+        <div class="container">
+            <h2 class="section-title">Faltan</h2>
+            <div class="countdown-container">
+                <div class="countdown-card">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+            <p class="countdown-subtitle">Para nuestro gran día</p>
+        </div>
+    </section>
+
+    <!-- Nuestra Historia -->
+    <section class="story">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>Fue el Señor quien unió nuestros pasos,
+                        quien tejió con amor cada encuentro y cada espera.<br>
+                        En su gracia aprendimos a amar con paciencia,
+                        a reír con gratitud y a orar con esperanza.<br>
+                        Hoy, guiados por su luz y confiados en su promesa,
+                        decimos “sí” a un destino bendecido por Él.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detalles del Evento -->
+    <section class="details">
+        <div class="container">
+            <h2 class="section-title">Detalles del Evento</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <i class="bi bi-calendar2-event detail-icon"></i>
+                    <h3>Fecha</h3>
+                    <p>29 de Marzo de 2026</p>
+                    <p class="detail-time">4:30 PM</p>
+                </div>
+                <div class="detail-card detail-location" id="detailLocation">
+                    <i class="bi bi-pin-map detail-icon"></i>
+                    <h3>Lugar</h3>
+                    <p>Casa Verde</p>
+                    <p class="detail-address">Los planes de renderos</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Casa+Verde+Los+planes+de+renderos" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn-maps">
+                     <span>Ver ubicación en Google Maps</span>
+                 </a>
+                </div>
+                <div class="detail-card detail-dresscode" id="detailDresscode">
+                    <i class="bi bi-people detail-icon"></i>
+                    <h3>Código de Vestimenta</h3>
+                    <p>Traje y vestido formal en tonos sobrios y calzado comodo para disfrutar al maximo!!</p>
+                </div>
+                <div class="detail-card detail-call" id="detailCall" style="display: none;">
+                    <i class="bi bi-camera-video detail-icon"></i>
+                    <h3>Únete a la Celebración</h3>
+                    <p>No puedes estar físicamente con nosotros, pero queremos que formes parte de este momento especial.</p>
+                    <a href="#" id="callLink" target="_blank" rel="noopener noreferrer" class="btn-call">
+                        <i class="bi bi-camera-video-fill"></i>
+                        <span>Unirse a la Llamada</span>
+                    </a>
+                </div>
+            </div>
+            <div class="details-message" id="detailsMessage">
+                <p class="details-text">Su presencia es el mejor regalo para nosotros.</p>
+                <p class="details-text">Si desea obsequiarnos algo adicional, agradeceremos que sea en sobre.</p>
+            </div>
+            <div class="maps-button-container">
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Nuestros Momentos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-001.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-002.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-003.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-004.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-005.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-006.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-007.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-008.jpg"style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG-009.jpg"style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG_6420.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG_6401.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><img src="Resources/img/IMG_6414.jpg" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mesa Section -->
+    <section class="mesa" id="mesaSection">
+        <div class="container">
+            <h2 class="section-title">Tu Mesa</h2>
+            <div class="mesa-content">
+                <p class="mesa-main-text">Con mucho cariño hemos reservado un lugar especial para ti. 🤍✨</p>
+                <p class="mesa-info" id="mesaInfo"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="rsvp">
+        <div class="container">
+            <h2 class="section-title">Confirma tu Asistencia</h2>
+            <p class="rsvp-subtitle">Estamos preparando cada detalle de este día tan especial.<br>
+                Te agradecemos confirmar tu asistencia antes del 20 de febrero de 2026.<br>
+                En caso de no recibir confirmación, entenderemos que no podrás acompañarnos.</p>
+            <form class="rsvp-form" id="rsvpForm" autocomplete="off" novalidate>
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required readonly>
+                </div>
+                <div class="form-group">
+                    <label class="response-label">¿Asistirás a nuestra boda?</label>
+                    <div class="response-buttons">
+                        <button type="button" class="response-btn response-yes" data-response="Sí">
+                            <span class="response-icon">✓</span>
+                            <span>Sí</span>
+                        </button>
+                        <button type="button" class="response-btn response-no" data-response="No">
+                            <span class="response-icon">✗</span>
+                            <span>No</span>
+                        </button>
+                    </div>
+                    <input type="hidden" id="response" name="response" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Mensaje (opcional)" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Respuesta</button>
+            </form>
+            <div class="rsvp-success" id="rsvpSuccess" style="display: none;">
+                <p>¡Gracias por confirmar tu asistencia! Te esperamos en nuestra celebración.</p>
+            </div>
+            <div class="rsvp-confirmed" id="rsvpConfirmed" style="display: none;">
+                <p>✓ Asistencia confirmada</p>
+            </div>
+            <br>
+            <p class="rsvp-subtitle">Si tienes alguna pregunta, no dudes en contactarnos: <a href="https://wa.me/50377259837" style="color: var(--primary-color);">Ana Orellana</a> o <a href="https://wa.me/50379372111" style="color: var(--primary-color);">Alex Siguenza</a>.</p>
+            <p class="rsvp-subtitle">Debido a la planificación y organización del evento, la invitación es válida únicamente para las personas indicadas.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-note">Esperamos compartir este día especial contigo</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>
+

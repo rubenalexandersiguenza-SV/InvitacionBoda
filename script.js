@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Countdown Timer - 29 de marzo de 2026 a las 5:00 PM (UTC-6)
     // Crear la fecha objetivo en UTC-6 (zona horaria de México/Centroamérica)
-    const weddingDate = new Date('2026-03-29T17:00:00-06:00');
+    const weddingDate = new Date('2026-03-29T16:30:00-06:00');
     
     function updateCountdown() {
         const daysEl = document.getElementById('days');
@@ -80,18 +80,147 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Manejo del formulario RSVP
-    const rsvpForm = document.getElementById('rsvpForm');
-    const rsvpSuccess = document.getElementById('rsvpSuccess');
+    // Obtener el token de la invitación
+    let id = new URLSearchParams(window.location.search).get("id");
+    
+    if (!id) {
+        id = sessionStorage.getItem("invitadoId");
+    }
     
     // IMPORTANTE: Reemplaza esta URL con la URL de tu aplicación web de Google Apps Script
     // Obtén la URL siguiendo las instrucciones en GOOGLE_SHEETS_SETUP.md
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMCdxt6JcEzEAXCtolxzlG8X0gdPy9_c7flZjFYK1tbom0kXurHUqDBbLzcEsPZI7J3g/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjA80fVERMe55dDy_mLdaFMGIYXFNu3PekRV5wiGZ2E4skOZ4cLyZJuM4sJekx9b9Omg/exec';
     
+    // Manejo del formulario RSVP
+    const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpSuccess = document.getElementById('rsvpSuccess');
+    const rsvpConfirmed = document.getElementById('rsvpConfirmed');
+    
+    // Función para mostrar el mensaje de confirmado y ocultar el formulario
+    function showConfirmedMessage() {
+        if (rsvpForm) {
+            rsvpForm.style.display = 'none';
+        }
+        if (rsvpConfirmed) {
+            rsvpConfirmed.style.display = 'block';
+        }
+    }
+    
+    // Función para verificar el estado de confirmación en Google Sheets
+    function checkConfirmationStatus(invitadoName) {
+        // Verificar confirmación en Google Sheets
+        const checkUrl = `${GOOGLE_SCRIPT_URL}?action=check&name=${encodeURIComponent(invitadoName)}`;
+        
+        fetch(checkUrl)
+            .then(res => res.json())
+            .then(result => {
+                if (result.success && result.confirmed) {
+                    showConfirmedMessage();
+                }
+            })
+            .catch(error => {
+                console.error('Error al verificar confirmación en Sheets:', error);
+                // Si hay error, permitir que el formulario se muestre
+            });
+    }
+    
+    // Cargar datos del invitado y llenar automáticamente el nombre
+    // También verificar si ya confirmó asistencia desde Google Sheets
+    if (id) {
+        fetch("invitados.json")
+            .then(res => res.json())
+            .then(data => {
+                const invitado = data[id];
+                
+                if (!invitado) {
+                    console.error('Invitado no encontrado para el token:', id);
+                    return;
+                }
+                
+                // Llenar automáticamente el campo nombre
+                const firstNameInput = document.getElementById('firstName');
+                if (firstNameInput) {
+                    firstNameInput.value = invitado.name;
+                }
+                
+                // Token especial para usuario remoto
+                const REMOTE_USER_TOKEN = 'm9h0i1j2-k3l4-45m3-7n56-234567890123';
+                
+                // Verificar si es el usuario remoto
+                if (id === REMOTE_USER_TOKEN) {
+                    // Ocultar sección de mesa
+                    const mesaSection = document.getElementById('mesaSection');
+                    if (mesaSection) {
+                        mesaSection.style.display = 'none';
+                    }
+                    
+                    // Ocultar tarjetas de lugar y vestimenta
+                    const detailLocation = document.getElementById('detailLocation');
+                    const detailDresscode = document.getElementById('detailDresscode');
+                    if (detailLocation) {
+                        detailLocation.style.display = 'none';
+                    }
+                    if (detailDresscode) {
+                        detailDresscode.style.display = 'none';
+                    }
+                    
+                    // Ocultar mensaje de regalo
+                    const detailsMessage = document.getElementById('detailsMessage');
+                    if (detailsMessage) {
+                        detailsMessage.style.display = 'none';
+                    }
+                    
+                    // Mostrar tarjeta de llamada
+                    const detailCall = document.getElementById('detailCall');
+                    if (detailCall) {
+                        detailCall.style.display = 'block';
+                    }
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //AGREGAR ENLACE DE LA LLAMADA ACA
+                    // Configurar enlace de llamada (aquí puedes cambiar la URL)
+                    const callLink = document.getElementById('callLink');
+                    if (callLink) {
+                        // TODO: Reemplazar con el enlace real de la llamada
+                        callLink.href = 'https://meet.google.com/zzu-quph-mfz?authuser=0&hs=122&ijlm=1768275919150'; // Cambiar por el enlace real
+                    }
+                } else {
+                    // Mostrar información de la mesa para usuarios normales
+                    const mesaInfo = document.getElementById('mesaInfo');
+                    if (mesaInfo && invitado.mesa) {
+                        mesaInfo.textContent = invitado.mesa;
+                    }
+                }
+                
+                // Verificar si ya confirmó asistencia desde Google Sheets
+                checkConfirmationStatus(invitado.name);
+            })
+            .catch(error => {
+                console.error('Error al cargar datos del invitado:', error);
+            });
+    }
+    
+    // Solo agregar event listeners si el formulario está visible
     if (rsvpForm) {
+        // Bandera para rastrear si el usuario hizo clic explícitamente en el botón de enviar
+        let userClickedSubmit = false;
+        
         // Manejar los botones de respuesta (Sí/No)
         const responseButtons = rsvpForm.querySelectorAll('.response-btn');
         const responseInput = document.getElementById('response');
+        
+        // Obtener el botón de submit y agregar listener para marcar cuando el usuario hace clic
+        const submitButton = rsvpForm.querySelector('.btn-submit');
+        if (submitButton) {
+            submitButton.addEventListener('click', function(e) {
+                // Marcar que el usuario hizo clic explícitamente
+                userClickedSubmit = true;
+            }, { once: false });
+        }
         
         responseButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -106,90 +235,125 @@ document.addEventListener('DOMContentLoaded', function() {
         
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             
-            const firstNameInput = document.getElementById('firstName');
-            const lastNameInput = document.getElementById('lastName');
-            const firstNameValue = firstNameInput.value.trim();
-            const lastNameValue = lastNameInput.value.trim();
-            
-            // Validar que el nombre no esté vacío
-            if (!firstNameValue) {
-                firstNameInput.focus();
-                firstNameInput.classList.add('error');
-                setTimeout(() => {
-                    firstNameInput.classList.remove('error');
-                }, 3000);
-                alert('Por favor, ingresa tu nombre antes de enviar la respuesta.');
+            // Si el usuario no hizo clic explícitamente en el botón, no enviar
+            if (!userClickedSubmit) {
+                console.log('Envío del formulario prevenido: el usuario no hizo clic explícitamente en enviar');
                 return;
             }
             
-            // Validar que el apellido no esté vacío
-            if (!lastNameValue) {
-                lastNameInput.focus();
-                lastNameInput.classList.add('error');
-                setTimeout(() => {
-                    lastNameInput.classList.remove('error');
-                }, 3000);
-                alert('Por favor, ingresa tu apellido antes de enviar la respuesta.');
-                return;
-            }
+            // Resetear la bandera después de verificar
+            userClickedSubmit = false;
             
-            // Remover clases de error si existen
-            firstNameInput.classList.remove('error');
-            lastNameInput.classList.remove('error');
-            
-            // Validar que se haya seleccionado una respuesta
-            if (!responseInput.value) {
-                alert('Por favor, selecciona si asistirás o no a la boda.');
-                return;
-            }
-            
-            // Deshabilitar el botón mientras se envía
-            const submitButton = rsvpForm.querySelector('.btn-submit');
-            const originalButtonText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Enviando...';
-            
-            // Obtener valores del formulario
-            const formData = {
-                firstName: firstNameValue,
-                lastName: lastNameValue,
-                response: responseInput.value,
-                message: document.getElementById('message').value.trim()
+            // Función para procesar el envío del formulario
+            const proceedWithSubmission = function() {
+                const firstNameInput = document.getElementById('firstName');
+                const firstNameValue = firstNameInput.value.trim();
+                
+                // Validar que el nombre no esté vacío
+                if (!firstNameValue) {
+                    firstNameInput.focus();
+                    firstNameInput.classList.add('error');
+                    setTimeout(() => {
+                        firstNameInput.classList.remove('error');
+                    }, 3000);
+                    alert('Por favor, verifica que el nombre esté correcto antes de enviar la respuesta.');
+                    return;
+                }
+                
+                // Remover clases de error si existen
+                firstNameInput.classList.remove('error');
+                
+                // Validar que se haya seleccionado una respuesta
+                if (!responseInput.value) {
+                    alert('Por favor, selecciona si asistirás o no a la boda.');
+                    return;
+                }
+                
+                // Deshabilitar el botón mientras se envía
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Enviando...';
+                
+                // Obtener valores del formulario
+                const formData = {
+                    firstName: firstNameValue,
+                    response: responseInput.value,
+                    message: document.getElementById('message').value.trim()
+                };
+                
+                // Verificar si la URL está configurada (debe ser diferente del placeholder)
+                if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+                    console.warn('Google Script URL no configurada. Los datos no se enviarán.');
+                    alert('Error: La URL de Google Apps Script no está configurada. Por favor, contacta al administrador.');
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                    return;
+                }
+                
+                // Log para debugging
+                console.log('Enviando datos a Google Sheets:', formData);
+                console.log('URL:', GOOGLE_SCRIPT_URL);
+                
+                // Enviar datos a Google Sheets
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(() => {
+                    // Con mode: 'no-cors' no podemos ver la respuesta, pero asumimos éxito
+                    console.log('Datos enviados exitosamente (no podemos verificar la respuesta con no-cors)');
+                    
+                    // Resetear la bandera después de un envío exitoso
+                    userClickedSubmit = false;
+                    
+                    rsvpForm.style.display = 'none';
+                    rsvpSuccess.style.display = 'block';
+                    rsvpForm.reset();
+                    // Limpiar selección de botones
+                    responseButtons.forEach(btn => btn.classList.remove('active'));
+                })
+                .catch(error => {
+                    console.error('Error al enviar:', error);
+                    // Resetear la bandera en caso de error para permitir reintentos
+                    userClickedSubmit = false;
+                    alert('Hubo un error al enviar tu confirmación. Por favor, intenta de nuevo. Si el problema persiste, verifica la consola del navegador (F12) para más detalles.');
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                });
             };
             
-            // Verificar si la URL está configurada
-            if (GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
-                console.warn('Google Script URL no configurada. Los datos no se enviarán.');
-                // Mostrar mensaje de éxito de todas formas (modo demo)
-                rsvpForm.style.display = 'none';
-                rsvpSuccess.style.display = 'block';
-                return;
-            }
+            // Verificar una vez más si ya confirmó desde Google Sheets (prevención adicional)
+            const firstNameInput = document.getElementById('firstName');
+            const invitadoName = firstNameInput ? firstNameInput.value.trim() : '';
             
-            // Enviar datos a Google Sheets
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(() => {
-                // Con mode: 'no-cors' no podemos ver la respuesta, pero asumimos éxito
-                rsvpForm.style.display = 'none';
-                rsvpSuccess.style.display = 'block';
-                rsvpForm.reset();
-                // Limpiar selección de botones
-                responseButtons.forEach(btn => btn.classList.remove('active'));
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Hubo un error al enviar tu confirmación. Por favor, intenta de nuevo.');
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-            });
+            if (invitadoName) {
+                const checkUrl = `${GOOGLE_SCRIPT_URL}?action=check&name=${encodeURIComponent(invitadoName)}`;
+                
+                fetch(checkUrl)
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.success && result.confirmed) {
+                            alert('Ya has confirmado tu asistencia anteriormente.');
+                            showConfirmedMessage();
+                            return;
+                        }
+                        // Continuar con el envío si no está confirmado
+                        proceedWithSubmission();
+                    })
+                    .catch(error => {
+                        console.error('Error al verificar confirmación:', error);
+                        // Continuar con el envío si hay error
+                        proceedWithSubmission();
+                    });
+            } else {
+                proceedWithSubmission();
+            }
         });
     }
     
@@ -221,6 +385,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+/*Funcion para reproducir el audio al dar click en el boton*/
+/*
 const audio = document.getElementById("audioFondo");
 const btn = document.getElementById("audioBtn");
 
@@ -234,4 +400,29 @@ btn.addEventListener("click", () => {
     btn.textContent = "▶️";
   }
 });
+*/
 
+const audio = document.getElementById("audioFondo");
+let yaReproducido = false;
+
+window.addEventListener("scroll", () => {
+if (!yaReproducido) {
+    audio.play().then(() => {
+    audio.volume = 0.05; // volumen de fondo
+    yaReproducido = true;
+    }).catch(err => {
+    console.log("El navegador bloqueó el audio:", err);
+    });
+}
+});
+
+// Validación del token fuera del DOMContentLoaded para mostrar error temprano si no hay token
+let id = new URLSearchParams(window.location.search).get("id");
+
+if (!id) {
+  id = sessionStorage.getItem("invitadoId");
+}
+
+if (!id) {
+  document.body.innerHTML = "<h2>Invitación no válida</h2>";
+}

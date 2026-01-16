@@ -384,6 +384,38 @@ section {
     font-size: 1.3rem;
 }
 
+.btn-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(91, 155, 213, 0.3);
+    margin-top: 1rem;
+}
+
+.btn-call:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 95, 0.4);
+    color: var(--white);
+}
+
+.btn-call:active {
+    transform: translateY(0);
+}
+
+.btn-call i {
+    font-size: 1.3rem;
+}
+
 /* Gallery Section */
 .gallery {
     background: var(--white);
@@ -420,9 +452,42 @@ section {
     font-weight: 600;
 }
 
+/* Mesa Section */
+.mesa {
+    background: var(--bg-light);
+}
+
+.mesa-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+}
+
+.mesa-main-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.mesa-info {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    padding: 1.5rem 2rem;
+    background: var(--white);
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
 /* RSVP Section */
 .rsvp {
-    background: var(--bg-light);
+    background: var(--white);
 }
 
 .rsvp-subtitle {
@@ -577,6 +642,27 @@ section {
     color: #155724;
 }
 
+.rsvp-confirmed {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    background: #d4edda;
+    border: 2px solid #c3e6cb;
+    border-radius: 8px;
+    text-align: center;
+    color: #155724;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.rsvp-confirmed p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 /* Footer */
 .footer {
     background: var(--secondary-color);
@@ -595,6 +681,101 @@ section {
     opacity: 0.9;
     font-weight: 300;
 }
+
+/*-------------------------Landing------------------------------*/
+    .hero-landing{
+        height: 100vh;
+        min-height: 600px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--white);
+        margin: 0;
+        text-align: center;
+        background-image: url('Resources/img/IMG_6414.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        z-index: 0;
+    
+    }
+
+    .overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* Ajusta la opacidad aquí (0.0 a 1.0) - valores más altos = más oscuro */
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .landing{
+        position: relative;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .icon-wrapper {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+    }
+
+    .icon-wrapper:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .icon-wrapper img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 4rem;
+    }
+
+    .guest-name-title{
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
+    }
 
 /* Animations */
 @keyframes fadeInUp {
@@ -638,11 +819,11 @@ section {
     }
     
     .hero-title {
-        font-size: 3rem;
+        font-size: 5rem;
     }
     
     .hero-title .and {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     
     .hero-subtitle {
@@ -696,6 +877,41 @@ section {
     
     section {
         padding: 60px 0;
+    }
+
+    /*Landing page styles*/
+
+    .guest-name-title{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 2.5rem;
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
     }
 }
 
@@ -807,8 +1023,52 @@ section {
         font-size: 1rem;
     }
     
+    .mesa-main-text {
+        font-size: 1.1rem;
+    }
+    
+    .mesa-info {
+        font-size: 1.5rem;
+        padding: 1.2rem 1.5rem;
+    }
+    
     .detail-card {
         padding: 2rem 1.5rem;
+    }
+
+    /*Landing page styles*/
+
+    .guest-name-title{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-name{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Lato', sans-serif;
+    }
+
+    .guest-spaces{
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        font-weight: 400;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: 'Dancing Script';
+    }
+
+    .bi-envelope-heart-fill{
+        font-size: 2rem;
+    }
+
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
     }
 }
 
